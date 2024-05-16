@@ -1,1 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interactive Images</title>
+<style>
+    #info {
+        display: none;
+        position: absolute;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        padding: 10px;
+        z-index: 100;
+    }
+</style>
+</head>
+<body>
 
+<img src="test.jpg" alt="Your Image" id="image" onclick="showInfo(event)">
+<div id="info"></div>
+
+<script>
+function showInfo(event) {
+    var infoDiv = document.getElementById("info");
+    var image = document.getElementById("image");
+    var offsetX = event.clientX - image.getBoundingClientRect().left;
+    var offsetY = event.clientY - image.getBoundingClientRect().top;
+
+    infoDiv.innerHTML = "Information about your image";
+    infoDiv.style.display = "block";
+    infoDiv.style.left = (offsetX + 10) + "px";
+    infoDiv.style.top = (offsetY + 10) + "px";
+
+    // You can customize the information displayed here based on your needs
+}
+
+document.addEventListener("click", function(event) {
+    var infoDiv = document.getElementById("info");
+    if (event.target !== infoDiv && event.target !== document.getElementById("image")) {
+        infoDiv.style.display = "none";
+    }
+});
+</script>
+
+</body>
+</html>
